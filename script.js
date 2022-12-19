@@ -65,13 +65,13 @@ const inputClosePin = document.querySelector('.form__input--pin');
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
+/* const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
-]);
+]); */
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
@@ -115,7 +115,7 @@ console.log(letters.join(' - ')); */
 ///////////////////////////////////////////////////////////////////
 // The at Method
 
-const arr = [23, 11, 64];
+/* const arr = [23, 11, 64];
 console.log(arr[0]);
 console.log(arr.at(0));
 
@@ -124,4 +124,55 @@ console.log(arr[arr.length -1]);
 console.log(arr.slice(-1)[0]);
 console.log(arr.at(-1));
 
-console.log('petros'.at(2));
+console.log('petros'.at(2)); */
+///////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////
+/* // Looping Arrays: forEach
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// FOR OF
+// for (const movement of movements) {
+for (const [i, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${i+1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${i+1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+console.log('\n-----FOREACH-----\n ');
+//  forEach does not allow to break or continue the loop
+movements.forEach(function(movement, index, array) {
+  if (movement > 0) {
+    console.log(`Movement ${index+1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index+1}: You withdrew ${Math.abs(movement)}`);
+  }
+});
+// 0: function(200)
+// 1: function(450)
+// 2: function(400)
+// ...
+ */
+
+// forEach with Maps and Sets
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function(value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// Set
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+// The underscore (_) in JS means a throwaway variable which is a completely unnecessary
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
+})

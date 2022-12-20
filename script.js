@@ -78,11 +78,27 @@ const displayMovements = function(movements) {
 };
 displayMovements(account1.movements);
 
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  })
+
+};
+createUsernames(accounts); // stw 
+console.log(accounts);
+
+
+
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // * Coding Challenge #1
 
-const data1  = {
+/* const data1  = {
   julia: [3, 5, 2, 12, 7],
   kate: [4, 1, 15, 8, 3],
 }
@@ -109,7 +125,7 @@ const checkDogs = function(dogsJulia, dogsKate) {
 }
 
 checkDogs(data1.julia, data1.kate);
-checkDogs(data2.julia, data2.kate);
+checkDogs(data2.julia, data2.kate); */
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -123,7 +139,32 @@ checkDogs(data2.julia, data2.kate);
 
 /////////////////////////////////////////////////
 
+/////////////////////////////////////////////////
+// The map Method
 
+/* const eurToUsd = 1.1;
+
+// const movementsUSD = account1.movements.map(function(mov) {
+//   return mov * eurToUsd;
+// });
+
+const movements = account1.movements;
+
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSDfor = [];
+for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+console.log(movementsUSDfor);
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i+1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+console.log(movementsDescriptions); */
+/////////////////////////////////////////////////
 // Simple Array Methods
 
 /* let arr = ['a', 'b', 'c', 'd', 'e'];

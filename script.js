@@ -166,6 +166,21 @@ btnTransfer.addEventListener('click', function(e) {
     }
 });
 
+btnLoan.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  const amount = Number(inputLoanAmount.value);
+
+  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+  currentAccount.movements.push(amount);
+
+  // Update UI
+  updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+})
+
 btnClose.addEventListener('click', function(e) {
   e.preventDefault();
   if (
@@ -257,6 +272,52 @@ console.log(calcAverageHumanAge(data1), calcAverageHumanAge(data2));
 ]); 
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]; 
+/////////////////////////////////////////////////
+// The some and every Methods
+
+console.log(movements);
+// EQUALITY
+console.log(movements.includes(-130));
+
+// CONDITION
+const anyDeposits = movements.some(mov => mov > 1500);
+console.log(anyDeposits);
+
+// EVERY
+console.log(movements.every(mov => mov > 0));
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+console.log(movements.filter(deposit));
+console.log(movements.every(deposit));
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// The flat and flatMap Methods
+
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// flat
+const overallBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+// flatMap
+const overallBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overallBalance);
+
+/////////////////////////////////////////////////
+
 /////////////////////////////////////////////////
 // The find Method
 // the find methods returns the first element which satisfies the condition

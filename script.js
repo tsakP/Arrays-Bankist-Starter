@@ -271,6 +271,49 @@ const data2 = [16, 6, 10, 5, 6, 1, 4]; */
 console.log(calcAverageHumanAge(data1), calcAverageHumanAge(data2)); 
 */
 
+//* Coding Challenge #4
+/////////////////////////////////////////////////
+ const dogs = [
+ { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+ { weight: 8, curFood: 200, owners: ['Matilda'] },
+ { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+ { weight: 32, curFood: 340, owners: ['Michael'] },
+ ];
+ 
+ // .1
+ dogs.forEach(dog => dog.recFood = Math.floor(dog.weight ** 0.75 * 28));
+
+ // .2
+ const sarahDog = dogs.find(dog => dog.owners.includes('Sarah'));
+ console.log(`Sarah's dog is eating ${sarahDog.curFood > sarahDog.recFood ? 'too much' : 'too little'}`);
+
+ // .3
+ const ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood).flatMap(dog => dog.owners);
+ const ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recFood).flatMap(dog => dog.owners);
+ console.log(ownersEatTooLittle, ownersEatTooMuch);
+
+ // .4 
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
+
+// .5 
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+
+// .6 
+const checkEatingOkay = dog => 
+  dog.recFood * 0.9 <= dog.curFood
+  && dog.curFood >=  dog.recFood * 1.1;
+console.log(dogs.some(checkEatingOkay));
+
+// .7 
+const dogsEatOkay = dogs.filter(checkEatingOkay);
+console.log(dogsEatOkay);
+
+// .8
+const dogsSortedAsc = dogs.slice().sort((a, b) => a.recFood - b.recFood);
+console.log(dogsSortedAsc);
+
+/////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -282,9 +325,93 @@ console.log(calcAverageHumanAge(data1), calcAverageHumanAge(data2));
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300]; 
 /////////////////////////////////////////////////
+// Array Methods Practice
+
+/* // 1.
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((sum, cur) => sum + cur, 0);
+
+console.log(bankDepositSum);
+
+// 2.
+const numDeposits1000 = accounts
+  .flatMap(acc => acc.movements)
+  // .reduce((count, cur) => cur >= 1000 ? count + 1 : count, 0);
+  .reduce((count, cur) => cur >= 1000 ? ++count : count, 0);
+  // .filter(mov => mov >= 1000).length;
+
+console.log(numDeposits1000);  
+
+// 3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((sums, cur) => {
+    // cur > 0 ? sums.deposits += cur : sums.withdrawals += cur;
+    sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur
+    return sums;
+  }, {deposits: 0, withdrawals: 0})
+
+  console.log(deposits, withdrawals);
+
+// 4.
+// this is a nice title -> This Is a Nice Title
+const convertTittleCase = function(title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => exceptions.includes(word) ? word : capitalize(word))
+    .join(' ');
+  return titleCase;
+}
+
+console.log(convertTittleCase('this is a nice title'));
+console.log(convertTittleCase('this is a LONG title but not too long'));
+console.log(convertTittleCase('this is another title with an EXAMPLE')); */
+/////////////////////////////////////////////////
+
+/////////////////////////////////////////////////
+// More ways of Creating and Filling Arrays
+/* const arr = [1, 2, 3, 4, 5, 6, 7]; 
+console.log(new Array(1, 2, 3, 4, 5, 6, 7)); 
+
+// Empty arrays + fill method
+const x = new Array(7);
+console.log(x);
+// x.fill(1);
+x.fill(1, 3, 5);
+console.log(x);
+
+arr.fill(23, 4, 6);
+console.log(arr);
+
+// Array.from
+const y = Array.from({length: 7}, () => 1);
+console.log(y);
+
+const z = Array.from({length: 7}, (_, i) => i + 1)
+console.log(z);
+
+const d = Array.from({length: 100}, () => Math.floor(Math.random() * 6 +1));
+console.log(d);
+
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+  console.log(movementsUI);
+
+  const movementUI2 = [...document.querySelectorAll('.movements__value')];
+}); */
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 // The some and every Methods
 
-console.log(movements);
+/* console.log(movements);
 // EQUALITY
 console.log(movements.includes(-130));
 
@@ -300,13 +427,13 @@ console.log(account4.movements.every(mov => mov > 0));
 const deposit = mov => mov > 0;
 console.log(movements.some(deposit));
 console.log(movements.filter(deposit));
-console.log(movements.every(deposit));
+console.log(movements.every(deposit)); */
 /////////////////////////////////////////////////
 
 /////////////////////////////////////////////////
 // The flat and flatMap Methods
 
-const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+/* const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
 console.log(arr.flat());
 
 const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
@@ -323,7 +450,7 @@ console.log(overallBalance);
 const overallBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, mov) => acc + mov, 0);
-console.log(overallBalance);
+console.log(overallBalance); */
 
 /////////////////////////////////////////////////
 
